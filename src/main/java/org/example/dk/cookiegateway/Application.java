@@ -27,7 +27,10 @@ public class Application {
                 .routes()
                 .route("examine_and_use_cookie_route", r -> r.host("dk.example.org:9090")
                         .and()
-                        .path("/")
+                        .path("/**")
+                        .and()
+                        .path("/styles/**", "/scripts/**")
+                        .negate()
                         .filters(f -> f.filter(useCookieFilter))
                         .uri("http://dk.example.org:8080"))
                 .build();
